@@ -11,15 +11,15 @@
     "default",
     "browser"
   ],
-  "homepage": "https://github.com/antfu/holazz/vscode-open-in-browser#readme",
+  "homepage": "https://github.com/holazz/vscode-open-in-browser#readme",
   "bugs": {
-    "url": "https://github.com/antfu/holazz/vscode-open-in-browser/issues"
+    "url": "https://github.com/holazz/vscode-open-in-browser/issues"
   },
   "license": "MIT",
   "author": "zz",
   "repository": {
     "type": "git",
-    "url": "https://github.com/holazz/vscode-open-in-browser"
+    "url": "https://github.com/vscode-open-in-browser"
   },
   "main": "./dist/index.js",
   "files": [
@@ -122,7 +122,7 @@
     "pack": "vsce package --no-dependencies --allow-star-activation",
     "test": "vitest",
     "typecheck": "tsc --noEmit",
-    "release": "bumpp --commit --push --tag"
+    "release": "bumpp --commit --push --tag && nr publish"
   },
   "dependencies": {
     "koa": "^2.13.4",
