@@ -1,20 +1,25 @@
 {
-  "name": "name",
-  "displayName": "My Extension",
-  "version": "0.0.0",
+  "name": "open-in-browser",
+  "displayName": "Open in Browser",
+  "version": "0.0.5",
   "publisher": "holazz",
   "packageManager": "pnpm@6.32.3",
-  "description": "",
-  "keywords": [],
-  "homepage": "https://github.com/holazz/[name]#readme",
+  "description": "Open html file in browser",
+  "keywords": [
+    "open",
+    "html",
+    "default",
+    "browser"
+  ],
+  "homepage": "https://github.com/antfu/holazz/vscode-open-in-browser#readme",
   "bugs": {
-    "url": "https://github.com/holazz/[name]/issues"
+    "url": "https://github.com/antfu/holazz/vscode-open-in-browser/issues"
   },
   "license": "MIT",
   "author": "zz",
   "repository": {
     "type": "git",
-    "url": "https://github.com/holazz/[name]"
+    "url": "https://github.com/holazz/vscode-open-in-browser"
   },
   "main": "./dist/index.js",
   "files": [
@@ -28,9 +33,86 @@
     "Other"
   ],
   "activationEvents": [
-    "*"
+    "onCommand:open-in-browser.open"
   ],
   "icon": "res/icon.png",
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "Open in Browser",
+      "properties": {
+        "open-in-browser.defaultBrowser": {
+          "type": "string",
+          "default": "System Default",
+          "enum": [
+            "System Default",
+            "Chrome",
+            "Firefox",
+            "Opera",
+            "Safari",
+            "Edge"
+          ],
+          "description": "%open-in-browser.defaultBrowser%"
+        },
+        "open-in-browser.useLocalServer": {
+          "type": "boolean",
+          "default": true,
+          "description": "%open-in-browser.useLocalServer%"
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "open-in-browser.open",
+        "title": "%open-in-browser.title%",
+        "icon": "$(globe)"
+      }
+    ],
+    "keybindings": [
+      {
+        "when": "editorTextFocus",
+        "command": "open-in-browser.open",
+        "key": "ctrl+alt+o",
+        "mac": "cmd+alt+o"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "when": "resourceLangId == html",
+          "command": "open-in-browser.open",
+          "group": "navigation"
+        }
+      ],
+      "editor/title": [
+        {
+          "when": "resourceLangId == html",
+          "command": "open-in-browser.open",
+          "group": "navigation"
+        }
+      ],
+      "editor/title/context": [
+        {
+          "when": "resourceLangId == html",
+          "command": "open-in-browser.open",
+          "group": "navigation"
+        }
+      ],
+      "editor/context": [
+        {
+          "when": "resourceLangId == html",
+          "command": "open-in-browser.open",
+          "group": "navigation"
+        }
+      ],
+      "touchBar": [
+        {
+          "when": "resourceLangId == html",
+          "command": "open-in-browser.open"
+        }
+      ]
+    }
+  },
   "scripts": {
     "build": "tsup src/index.ts --external vscode",
     "dev": "nr build --watch",
@@ -40,12 +122,20 @@
     "pack": "vsce package --no-dependencies --allow-star-activation",
     "test": "vitest",
     "typecheck": "tsc --noEmit",
-    "release": "bumpp --commit --push --tag && nr publish"
+    "release": "bumpp --commit --push --tag"
+  },
+  "dependencies": {
+    "koa": "^2.13.4",
+    "koa-static": "^5.0.0",
+    "open": "^8.4.0",
+    "portfinder": "^1.0.28"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.18.8",
     "@antfu/ni": "^0.13.2",
     "@babel/types": "^7.17.0",
+    "@types/koa": "^2.13.4",
+    "@types/koa-static": "^4.0.2",
     "@types/node": "^17.0.21",
     "@types/vscode": "^1.65.0",
     "bumpp": "^7.1.1",

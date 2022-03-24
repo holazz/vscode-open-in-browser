@@ -1,0 +1,5 @@
+{
+  "open-in-browser.title": "Open in Browser",
+  "open-in-browser.defaultBrowser":"Determines which browser to use by default.",
+  "open-in-browser.useLocalServer": "Controls whether to open with the local server."
+}
