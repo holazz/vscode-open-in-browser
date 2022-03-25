@@ -16,7 +16,7 @@ VS Code extension for opening the HTML file in  your browser
 
 ### Command
 
-1. Open a HTML file.
+1. Open an HTML file.
 
 2. Press <kbd>F1</kbd> and type `Open in Browser`.
 
