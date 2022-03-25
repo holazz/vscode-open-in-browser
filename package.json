@@ -19,7 +19,7 @@
   "author": "zz",
   "repository": {
     "type": "git",
-    "url": "https://github.com/vscode-open-in-browser"
+    "url": "https://github.com/holazz/vscode-open-in-browser"
   },
   "main": "./dist/index.js",
   "files": [
