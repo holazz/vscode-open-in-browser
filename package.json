@@ -70,7 +70,7 @@
     ],
     "keybindings": [
       {
-        "when": "editorTextFocus",
+        "when": "resourceLangId == html",
         "command": "open-in-browser.open",
         "key": "ctrl+alt+o",
         "mac": "cmd+alt+o"
