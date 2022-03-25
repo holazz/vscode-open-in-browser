@@ -1,10 +1,10 @@
 {
   "name": "open-in-browser",
   "displayName": "Open in Browser",
-  "version": "0.0.5",
+  "version": "0.0.0",
   "publisher": "holazz",
   "packageManager": "pnpm@6.32.3",
-  "description": "Open html file in browser",
+  "description": "Opening the HTML file in your browser",
   "keywords": [
     "open",
     "html",
