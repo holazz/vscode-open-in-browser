@@ -17,6 +17,7 @@
         "exports": "always-multiline",
         "functions": "never"
       }
-    ]
+    ],
+    "@typescript-eslint/brace-style": ["error", "1tbs", { "allowSingleLine": true }]
   }
 }
