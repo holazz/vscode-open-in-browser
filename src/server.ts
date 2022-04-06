@@ -1,22 +1,32 @@
-import Koa from 'koa'
-import serve from 'koa-static'
-import portfinder from 'portfinder'
-import { DEFAULT_SERVER_PORT } from './constants'
+import http from 'http'
+import type { Server } from 'http'
+import sirv from 'sirv'
+import { DEFAULT_SERVER_HOST, DEFAULT_SERVER_PORT } from './constants'
 import { getActiveFileRelativePath, getActiveFileWorkspace } from './utils'
 
-export class Server {
-  private static app: Koa | null = null
+export class HttpServer {
+  private static app: Server | null = null
   private static port: number = DEFAULT_SERVER_PORT
 
   static async create(): Promise<string> {
     if (this.app) return `http://localhost:${this.port}/${getActiveFileRelativePath()}`
 
-    this.app = new Koa()
-    this.port = await portfinder.getPortPromise({ port: this.port })
-    this.app.use(serve(getActiveFileWorkspace()))
+    this.app = http.createServer(sirv(getActiveFileWorkspace()))
 
-    return new Promise((resolve) => {
-      this.app!.listen(this.port, () => {
+    return new Promise((resolve, reject) => {
+      const onError = (e: Error & { code?: string }) => {
+        if (e.code === 'EADDRINUSE') {
+          this.app!.listen(++this.port, DEFAULT_SERVER_HOST)
+        } else {
+          this.app!.removeListener('error', onError)
+          reject(e)
+        }
+      }
+
+      this.app!.on('error', onError)
+
+      this.app!.listen(this.port, DEFAULT_SERVER_HOST, () => {
+        this.app!.removeListener('error', onError)
         resolve(`http://localhost:${this.port}/${getActiveFileRelativePath()}`)
       })
     })
