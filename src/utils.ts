@@ -6,7 +6,9 @@ import type { AppName, Options } from 'open'
 
 function getBrowserOption(name: string) {
   return {
-    app: { name: apps[name as AppName] || name },
+    app: {
+      name: apps[name as AppName] || name,
+    },
   }
 }
 

@@ -11,7 +11,11 @@ export class HttpServer {
   static async create(): Promise<string> {
     if (this.app) return `http://localhost:${this.port}/${getActiveFileRelativePath()}`
 
-    this.app = http.createServer(sirv(getActiveFileWorkspace()))
+    this.app = http.createServer(sirv(getActiveFileWorkspace(), {
+      dev: true,
+      dotfiles: true,
+      etag: true,
+    }))
 
     return new Promise((resolve, reject) => {
       const onError = (e: Error & { code?: string }) => {
