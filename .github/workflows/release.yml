@@ -22,4 +22,4 @@ jobs:
       - name: Release
         run: npx conventional-github-releaser -p angular -v
         env:
-          CONVENTIONAL_GITHUB_RELEASER_TOKEN: ${{secrets.GITHUB_TOKEN}}     
+          CONVENTIONAL_GITHUB_RELEASER_TOKEN: ${{secrets.GITHUB_TOKEN}}
