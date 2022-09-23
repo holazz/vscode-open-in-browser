@@ -1,5 +1,5 @@
 {
   "open-in-browser.title": "在浏览器中打开",
-  "open-in-browser.defaultBrowser":"配置默认使用的浏览器。",
+  "open-in-browser.defaultBrowser": "配置默认使用的浏览器。",
   "open-in-browser.useLocalServer": "控制是否用本地服务器打开。"
 }

@@ -1,6 +1,7 @@
 import * as path from 'path'
 import { window, workspace } from 'vscode'
 import { apps } from 'open'
+
 import type { Uri } from 'vscode'
 import type { AppName, Options } from 'open'
 
@@ -30,7 +31,9 @@ export function getConfig<T = any>(key: string): T | undefined {
 }
 
 export function getActiveFileWorkspace() {
-  const workspaceFolder = workspace.getWorkspaceFolder(window?.activeTextEditor?.document?.uri as Uri)
+  const workspaceFolder = workspace.getWorkspaceFolder(
+    window?.activeTextEditor?.document?.uri as Uri
+  )
   return workspaceFolder?.uri.fsPath as string
 }
 
@@ -39,5 +42,7 @@ export function getActiveFilePath() {
 }
 
 export function getActiveFileRelativePath() {
-  return encodeURIComponent(path.relative(getActiveFileWorkspace(), getActiveFilePath())).replace('%2F', '/')
+  return encodeURIComponent(
+    path.relative(getActiveFileWorkspace(), getActiveFilePath())
+  ).replace('%2F', '/')
 }

@@ -1,21 +1,25 @@
 import http from 'http'
-import type { Server } from 'http'
 import sirv from 'sirv'
 import { DEFAULT_SERVER_HOST, DEFAULT_SERVER_PORT } from './constants'
 import { getActiveFileRelativePath, getActiveFileWorkspace } from './utils'
+
+import type { Server } from 'http'
 
 export class HttpServer {
   private static app: Server | null = null
   private static port: number = DEFAULT_SERVER_PORT
 
   static async create(): Promise<string> {
-    if (this.app) return `http://localhost:${this.port}/${getActiveFileRelativePath()}`
+    if (this.app)
+      return `http://localhost:${this.port}/${getActiveFileRelativePath()}`
 
-    this.app = http.createServer(sirv(getActiveFileWorkspace(), {
-      dev: true,
-      dotfiles: true,
-      etag: true,
-    }))
+    this.app = http.createServer(
+      sirv(getActiveFileWorkspace(), {
+        dev: true,
+        dotfiles: true,
+        etag: true,
+      })
+    )
 
     return new Promise((resolve, reject) => {
       const onError = (e: Error & { code?: string }) => {
